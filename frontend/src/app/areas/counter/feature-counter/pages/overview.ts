@@ -13,7 +13,11 @@ import { FizzBuzz } from '../../ui-counter/fizz-buzz';
         <button (click)="decrement()" class="btn btn-primary">-</button>
         <span class="p-2 text-lg">{{ current() }}</span>
         <button (click)="increment()" class="btn btn-primary">+</button>
-        <button (click)="reset()" class="btn btn-primary">Reset</button>
+      </div>
+      <div>
+        <button [disabled]="current() === 0" (click)="current.set(0)" class="btn btn-primary">
+          Reset
+        </button>
       </div>
       <app-counter-fizzbuzz [current]="current()" />
     </div>
@@ -22,17 +26,18 @@ import { FizzBuzz } from '../../ui-counter/fizz-buzz';
 })
 export class OverviewPage {
   current = signal(0);
+
   isEven = computed(() => this.current() % 2 === 0);
+
   decrement() {
-    //this.current.set(this.current() - 1);
+    // this.current.set(this.current() - 1);
     this.current.update((c) => c - 1);
   }
+
   increment() {
-    //this.current.set(this.current() + 1);
+    // this.current.set(this.current() + 1);
     this.current.update((c) => c + 1);
   }
 
-  reset() {
-    this.current.set(0);
-  }
+  // Fizzbuzz - if current is equally divisible by 3 it is 'fizz', 5 is 'buzz', 3 & 5 'fizzbuzz', otherwise, nothing.
 }
