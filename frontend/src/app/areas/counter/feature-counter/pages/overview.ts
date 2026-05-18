@@ -1,43 +1,29 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PageHeader } from '../../../shared/ui-page-header/page-header';
-import { FizzBuzz } from '../../ui-counter/fizz-buzz';
+import { counterStore } from '../../data-counter/store';
 
 @Component({
   selector: 'app-counter-page',
-  imports: [PageHeader, FizzBuzz],
+  imports: [PageHeader],
   template: `
     <app-page-header title="Counter Overview" description="The Counter" />
     <div class="prose max-w-none">
-      <p>Is Even {{ isEven() }}</p>
       <div>
-        <button (click)="decrement()" class="btn btn-primary">-</button>
-        <span class="p-2 text-lg">{{ current() }}</span>
-        <button (click)="increment()" class="btn btn-primary">+</button>
+        <button (click)="store.decrement()" class="btn btn-primary">-</button>
+        <span class="p-2 text-lg">{{ store.current() }}</span>
+        <button (click)="store.increment()" class="btn btn-primary">+</button>
       </div>
       <div>
-        <button [disabled]="current() === 0" (click)="current.set(0)" class="btn btn-primary">
+        <button [disabled]="store.resetDisabled()" (click)="store.reset()" class="btn btn-primary">
           Reset
         </button>
       </div>
-      <app-counter-fizzbuzz [current]="current()" />
     </div>
   `,
   styles: ``,
 })
 export class OverviewPage {
-  current = signal(0);
-
-  isEven = computed(() => this.current() % 2 === 0);
-
-  decrement() {
-    // this.current.set(this.current() - 1);
-    this.current.update((c) => c - 1);
-  }
-
-  increment() {
-    // this.current.set(this.current() + 1);
-    this.current.update((c) => c + 1);
-  }
+  store = inject(counterStore);
 
   // Fizzbuzz - if current is equally divisible by 3 it is 'fizz', 5 is 'buzz', 3 & 5 'fizzbuzz', otherwise, nothing.
 }

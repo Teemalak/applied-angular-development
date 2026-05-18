@@ -1,4 +1,5 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
+import { counterStore } from '../data-counter/store';
 
 @Component({
   selector: 'app-counter-fizzbuzz',
@@ -24,9 +25,9 @@ import { Component, computed, input } from '@angular/core';
   styles: ``,
 })
 export class FizzBuzz {
-  current = input.required<number>();
+  store = inject(counterStore);
   fizzBuzz = computed(() => {
-    const current = this.current();
+    const current = this.store.current();
     if (current === 0) {
       return;
     }
