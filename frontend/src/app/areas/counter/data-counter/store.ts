@@ -1,8 +1,7 @@
 // I need a store that holds a signal for what we are counting by, and allows the prefs component to set that variable,
 // other components can access this too, but it should be used only within the counter area.
 
-import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable } from '@angular/core';
+import { computed } from '@angular/core';
 import {
   patchState,
   signalStore,
@@ -13,8 +12,8 @@ import {
   withState,
 } from '@ngrx/signals';
 
-const byValues = [1, 3, 5] as const;
-type ByValues = (typeof byValues)[number];
+//const byValues = [1, 3, 5] as const;
+type ByValues = 1 | 3 | 5;
 
 type CounterState = {
   by: ByValues;
