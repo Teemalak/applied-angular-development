@@ -5,7 +5,6 @@ import { counterStore } from '../../data-counter/store';
 @Component({
   selector: 'app-counter-prefs',
   imports: [PageHeader],
-  providers: [],
   template: `
     <app-page-header title="Preferences" description="Set Preferences For the Counter" />
     <div class="prose max-w-none">

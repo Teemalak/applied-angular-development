@@ -9,7 +9,7 @@ export const CounterRoutes: Routes = [
     path: '',
     component: Counter,
     data: { area: { label: 'Area Title' } },
-    providers: [counterStore], // when I enter this route, the first place it gets injected, create an instance. (created "lazy")
+    providers: [counterStore],
     children: [
       {
         path: '',

@@ -11,9 +11,10 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
+import { Counter } from '../feature-counter/counter';
 
-//const byValues = [1, 3, 5] as const;
-type ByValues = 1 | 3 | 5;
+const byValues = [1, 3, 5] as const;
+type ByValues = (typeof byValues)[number];
 
 type CounterState = {
   by: ByValues;
@@ -40,7 +41,6 @@ export const counterStore = signalStore(
   }),
   withHooks({
     onInit(store) {
-      console.log('New Store Created!');
       const savedJson = localStorage.getItem('counter-data');
       if (savedJson !== null) {
         const savedState = JSON.parse(savedJson) as unknown as CounterState;
