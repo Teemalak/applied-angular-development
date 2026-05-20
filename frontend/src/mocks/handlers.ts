@@ -3,9 +3,17 @@ import { HttpHandler } from 'msw';
 import resourcesHandler from './resources/resources';
 import booksHandler from './books/books';
 import newsHandler from './news/news';
+import catalogHandler from './catalog/catalog';
+import vendorsHandler from './vendors/vendors';
 import bypassed from './bypassed-endpoints';
 
-const all: HttpHandler[] = [...resourcesHandler, ...booksHandler, ...newsHandler];
+const all: HttpHandler[] = [
+  ...resourcesHandler,
+  ...booksHandler,
+  ...newsHandler,
+  ...catalogHandler,
+  ...vendorsHandler,
+];
 
 export const handlers: HttpHandler[] = all.filter((h) => {
   const { method, path } = h.info;

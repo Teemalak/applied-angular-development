@@ -4,7 +4,7 @@ import { NgIcon } from '@ng-icons/core';
 import { AppNavData } from './app.routes';
 import { IconName } from './areas/shared/util-icons/icons';
 import { UserStats } from './areas/shared/ui-auth/user-stats';
-
+import { StellarOverlayComponent } from '@hypertheory-labs/stellar-ng-devtools';
 interface NavEntry {
   path: string;
   label: string;
@@ -14,7 +14,7 @@ interface NavEntry {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIcon, UserStats],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIcon, UserStats, StellarOverlayComponent],
   template: `
     <div class="drawer drawer-open">
       <input
@@ -36,6 +36,8 @@ interface NavEntry {
         <main class="flex-1 bg-base-200">
           <div class="max-w-7xl mx-auto w-full p-6">
             <router-outlet />
+
+            <stellar-overlay />
           </div>
         </main>
       </div>
@@ -87,7 +89,7 @@ interface NavEntry {
 export class App {
   private router = inject(Router);
 
-  protected readonly title = signal('Applied Angular');
+  protected readonly title = signal('Software Center');
   protected readonly pinned = signal(false);
   protected readonly hovered = signal(false);
   protected readonly open = computed(() => this.pinned() || this.hovered());
