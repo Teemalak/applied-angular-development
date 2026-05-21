@@ -1,13 +1,8 @@
 import { patchState, signalStore, withHooks, withMethods } from '@ngrx/signals';
 import { addEntity, setEntities, withEntities } from '@ngrx/signals/entities';
 import { VendorCreate, VendorEntity } from './types';
-import { withStellarDevtools } from '@hypertheory-labs/stellar-ng-devtools';
 
 export const vendorsStore = signalStore(
-  withStellarDevtools('VendorsStore', {
-    description: 'This store manages the vendors for our software center',
-    sourceHint: `src\\app\\areas\\catalog\\data-catalog\\vendors-store.ts`,
-  }),
   withEntities<VendorEntity>(),
   withMethods((store) => {
     return {
